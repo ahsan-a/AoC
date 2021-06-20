@@ -1,5 +1,5 @@
 import { fromFileUrl, dirname } from 'https://deno.land/std/path/mod.ts';
-const input = await Deno.readTextFile(`${dirname(fromFileUrl(import.meta.url))}\\input.txt`);
+const input = Deno.readTextFileSync(`${dirname(fromFileUrl(import.meta.url))}\\input.txt`);
 
 function p1(): number {
 	let floor = 0;
