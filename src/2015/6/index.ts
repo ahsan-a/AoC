@@ -40,4 +40,47 @@ function p1() {
 	return lit;
 }
 
-console.log(p1());
+function p2() {
+	let lights: number[][] = [];
+
+	let lit = 0;
+
+	for (const ins of input) {
+		const [x1, x2]: number[] = ins.match(/\d\d?\d?,/g)?.map((x: string | number) => (x = parseInt((x as string).replace(/,/g, '')))) as number[];
+		const [y1, y2] = ins.match(/,\d\d?\d?/g)?.map((x: string | number) => (x = parseInt((x as string).replace(/,/g, '')))) as number[];
+
+		const instruction = ins.match(/[a-z]+\s[a-z]*\s?\d/g)?.map((x) => x.replaceAll('turn ', '').replace(/\s\d/g, ''))[0] as
+			| 'on'
+			| 'off'
+			| 'toggle';
+
+		for (let i = x1; i <= x2; i++) {
+			if (!lights[i]) lights[i] = [];
+			for (let j = y1; j <= y2; j++) {
+				switch (instruction) {
+					case 'on':
+						lights[i][j] = lights[i][j] ? lights[i][j] + 1 : 1;
+						lit++;
+						break;
+					case 'off': {
+						if (!lights[i][j] || lights[i][j] < 1) lights[i][j] = 0;
+						else {
+							lights[i][j]--;
+							lit--;
+						}
+						break;
+					}
+
+					case 'toggle':
+						lights[i][j] = lights[i][j] ? lights[i][j] + 2 : 2;
+						lit += 2;
+						break;
+				}
+			}
+		}
+	}
+
+	return lit;
+}
+
+console.log(p2());
