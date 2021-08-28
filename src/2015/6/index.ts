@@ -1,8 +1,8 @@
-import { fromFileUrl, dirname } from 'https://deno.land/std/path/mod.ts';
+import { fromFileUrl, dirname } from 'https://deno.land/std@0.105.0/path/mod.ts';
 const input = Deno.readTextFileSync(`${dirname(fromFileUrl(import.meta.url))}\\input.txt`).split('\n');
 
 function p1() {
-	let lights: boolean[][] = [];
+	const lights: boolean[][] = [];
 
 	let lit = 0;
 
@@ -41,7 +41,7 @@ function p1() {
 }
 
 function p2() {
-	let lights: number[][] = [];
+	const lights: number[][] = [];
 
 	let lit = 0;
 
